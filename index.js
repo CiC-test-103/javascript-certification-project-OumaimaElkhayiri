@@ -1,4 +1,5 @@
 // Necessary Imports, DO NOT REMOVE
+const { stderr } = require("process");
 const { LinkedList } = require("./LinkedList");
 const { Student } = require('./Student')
 const readline = require('readline');
@@ -47,7 +48,9 @@ async function handleCommand(command) {
         console.log('Adding student...')
         const [name, year, email, specialization] = args
         // --------> WRITE YOUR CODE BELOW
-
+        const newStudent = new Student(name, parseInt(year), email, specialization);
+        studentManagementSystem.addStudent(newStudent);
+        console.log('Added student, New List: ', studentManagementSystem.displayStudents());
         // --------> WRITE YOUR CODE ABOVE
         break;
 
@@ -62,7 +65,9 @@ async function handleCommand(command) {
        */
       console.log('Removing student...')
       // --------> WRITE YOUR CODE BELOW
-      
+      const removeEmail = args[0];
+      studentManagementSystem.removeStudent(removeEmail);
+      console.log('Removed Student , New List: ', studentManagementSystem.displayStudents());
       // --------> WRITE YOUR CODE ABOVE
       break;
 
@@ -75,7 +80,7 @@ async function handleCommand(command) {
        */
       console.log('Displaying students...')
       // --------> WRITE YOUR CODE BELOW
-
+      console.log(studentManagementSystem.displayStudents());
       // --------> WRITE YOUR CODE ABOVE
       break;
 
@@ -91,7 +96,13 @@ async function handleCommand(command) {
        */
       console.log('Finding student...')
       // --------> WRITE YOUR CODE BELOW
-      
+      const findEmail = args[0];
+      const foundStudent = studentManagementSystem.findStudent(findEmail);
+      if (foundStudent === -1) {
+        console.log("Student does not exist")
+      } else {
+        console.log("Student does not exist")
+      }
       // --------> WRITE YOUR CODE ABOVE
       break;
 
@@ -106,8 +117,11 @@ async function handleCommand(command) {
        */
       console.log('Saving data...')
       // --------> WRITE YOUR CODE BELOW
-
+      const saveFileName = args[0];
+      studentManagementSystem.saveToJson(saveFileName);
+      console.log('List saved succesfully !')
       // --------> WRITE YOUR CODE ABOVE
+      break;
 
     case "load":
       /**
@@ -120,7 +134,9 @@ async function handleCommand(command) {
        */
       console.log('Loading data...')
       // --------> WRITE YOUR CODE BELOW
-
+      const loadFileName = args[0];
+      studentManagementSystem.loadFromJSON(loadFileName);
+      console.log('Loaded data list:' , studentManagementSystem.displayStudents());
       // --------> WRITE YOUR CODE ABOVE
       break;
 
@@ -134,7 +150,8 @@ async function handleCommand(command) {
        */
       console.log('Clearing data...')
       // --------> WRITE YOUR CODE BELOW
-
+      studentManagementSystem.clearStudents();
+      console.log('Data cleared');
       // --------> WRITE YOUR CODE ABOVE
       break;
 
