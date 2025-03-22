@@ -161,14 +161,6 @@ class LinkedList {
    * - Use sortStudentsByName()
    */
   filterBySpecialization(specialization) {
-    let filteredStudents = [];
-    let current = this.head;
-    while(current) {
-      if (current.data.getSpecialization() === specialization) {
-        filteredStudents.push(current.data);
-      }
-      current = current.next;
-    }
     return this.#sortStudentsByName().filter(filteredStudents => 
       filteredStudents.getSpecialization() === specialization
     ); 
