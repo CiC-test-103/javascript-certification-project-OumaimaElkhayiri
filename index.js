@@ -101,7 +101,7 @@ async function handleCommand(command) {
       if (foundStudent === -1) {
         console.log("Student does not exist")
       } else {
-        console.log("Student does not exist")
+        console.log(foundStudent.getString());
       }
       // --------> WRITE YOUR CODE ABOVE
       break;

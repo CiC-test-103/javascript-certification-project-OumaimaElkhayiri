@@ -37,6 +37,8 @@ class LinkedList {
    */
   constructor() {
     this.head = null;
+    this.tail = null;
+    this.length = 0;
   }
 
   /**
@@ -49,12 +51,14 @@ class LinkedList {
    */
   addStudent(newStudent) {
     const newNode = new Node(newStudent);
-    if(!this.head) {
-      this.head = this.tail = newNode;
+    if(this.head === null ) {
+      this.head = newNode
+      this.tail = newNode;
     } else {
       this.tail.next = newNode;
       this.tail = newNode;
     }
+
     this.length++;
   }
 
@@ -146,7 +150,7 @@ class LinkedList {
       studentsArray.push(current.data);
       current = current.next;
     }
-    return studentsArray.sort((a,b) => a.getName().localCompare(b.getName()));
+    return studentsArray.sort((a,b) => a.getName().localeCompare(b.getName()));
   }
 
   /**
@@ -165,7 +169,9 @@ class LinkedList {
       }
       current = current.next;
     }
-    return this.#sortStudentsByName(filteredStudents);
+    return this.#sortStudentsByName().filter(filteredStudents => 
+      filteredStudents.getSpecialization() === specialization
+    ); 
   }
 
   /**
